@@ -11,11 +11,11 @@ import javax.inject.Inject
 class NetworkDataSource @Inject constructor(
     private val webService: WebService
 ) {
-    suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<ResponseDrink>>> =
+    suspend fun getDrinkByName(cocktailName: String): Flow<Resource<List<DrinkResponse>>> =
         callbackFlow {
             offer(
                 Resource.Success(
-                    webService.getCocktailByName(cocktailName)?.cocktailList ?: listOf()
+                    webService.getDrinkByName(cocktailName)?.cocktailList ?: listOf()
                 )
             )
             awaitClose { close() }
